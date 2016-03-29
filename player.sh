@@ -12,20 +12,16 @@ echo "Running player..."
 while true; do
     button_state=$(gpio read $gpio_pin)
 
-    echo "... button state: ${button_state}"
-
     if [ $button_state -eq 0 ]; then
         kill_pattern="mpg321 -a ${audio_device}"
         pkill -f "${kill_pattern}"
-
-        echo "... killing ${kill_pattern}"
 
         audio_file_path="${jgs_usb_path}${sound_file}"
 
         mpg321 -a $audio_device $audio_file_path -l 1
     fi
 
-    sleep 0.05
+    sleep 0.12
 done
 
 echo "... done!"
